@@ -53,8 +53,8 @@ class CountryService
                 // Calculate estimated GDP
                 $population = $countryData['population'] ?? 0;
                 $estimatedGdp = $exchangeRate && $population
-                    ? $population * rand(1000, 2000) * $exchangeRate
-                    : 0;
+    ? ($population * rand(1000, 2000)) / $exchangeRate
+    : 0;
 
                 // Update or create country
                 Country::updateOrCreate(
