@@ -8,12 +8,15 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
         api: __DIR__.'/../routes/api.php',
-        apiPrefix: '', // Changed from 'api' to empty string
+        apiPrefix: '',
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->validateCsrfTokens(except: [
+            '/countries/*',
+            '/status',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
