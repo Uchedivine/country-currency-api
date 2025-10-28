@@ -14,9 +14,10 @@ return new class extends Migration
             $table->string('capital')->nullable();
             $table->string('region')->nullable();
             $table->bigInteger('population');
-$table->string('currency_code')->nullable();
-$table->decimal('exchange_rate', 15, 6)->nullable();
-$table->decimal('estimated_gdp', 20, 2)->nullable();
+            $table->string('currency_code')->nullable();
+            $table->decimal('exchange_rate', 15, 6)->nullable();
+            $table->decimal('estimated_gdp', 20, 2)->nullable();
+            $table->string('flag_url')->nullable(); // Make sure this line exists!
             $table->timestamp('last_refreshed_at')->nullable();
             $table->timestamps();
             
