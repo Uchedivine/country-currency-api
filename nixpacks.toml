@@ -1,11 +1,18 @@
 [phases.setup]
-nixPkgs = [
-  "php82",
-  "php82Packages.composer"
-]
+nixPkgs = ["php82", "php82Packages.composer", "php82Extensions.pdo", "php82Extensions.pdo_mysql", "php82Extensions.gd", "php82Extensions.mbstring", "php82Extensions.curl"]
 
 [phases.install]
-cmds = ["composer install --no-dev --optimize-autoloader"]
+cmds = ["composer install --no-dev --optimize-autoloader --no-interaction"]
+
+[phases.build]
+cmds = [
+    "mkdir -p storage/framework/{sessions,views,cache}",
+    "mkdir -p cache",
+    "chmod -R 775 storage cache",
+    "php artisan config:cache",
+    "php artisan route:cache",
+    "php artisan view:cache"
+]
 
 [start]
 cmd = "php artisan serve --host=0.0.0.0 --port=$PORT"
